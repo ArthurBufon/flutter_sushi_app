@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sushi_app/components/button.dart';
+import 'package:flutter_sushi_app/models/item_model.dart';
 import 'package:flutter_sushi_app/theme/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,13 +12,28 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  final List<String> descriptions = <String>[
-    'sushi 1',
-    'sushi 2',
-    'sushi 3',
-    'sushi 4',
-    'sushi 5',
-    'sushi 6',
+  // List of items.
+  final List<Item> itemsList = <Item>[
+    Item(
+        image: 'lib/images/sake_nigiri.png',
+        description: 'Sake Nigiri',
+        price: 16.50,
+        rating: 7.5),
+    Item(
+        image: 'lib/images/sashimi.png',
+        description: 'Sashimi',
+        price: 10.70,
+        rating: 9.1),
+    Item(
+        image: 'lib/images/surimi_nigiri.png',
+        description: 'Surimi Nigiri',
+        price: 23.00,
+        rating: 8.3),
+    Item(
+        image: 'lib/images/rolls.png',
+        description: 'Rolls',
+        price: 32.50,
+        rating: 9.5),
   ];
 
   @override
@@ -41,8 +57,6 @@ class _MenuPageState extends State<MenuPage> {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 15),
-
           // Redeem promo.
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -98,10 +112,17 @@ class _MenuPageState extends State<MenuPage> {
 
           const SizedBox(height: 20),
 
+          // Search here.
           Padding(
             padding: const EdgeInsets.only(left: 32, right: 32),
             child: TextField(
               decoration: InputDecoration(
+                hintText: 'Search here...',
+                hintStyle: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[600],
+                ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                   borderSide: const BorderSide(
@@ -123,15 +144,15 @@ class _MenuPageState extends State<MenuPage> {
           // Title food menu
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
+            children: [
               Padding(
-                padding: EdgeInsets.only(left: 32),
+                padding: const EdgeInsets.only(left: 32),
                 child: Text(
                   'Food Menu',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 100, 100, 100),
+                    color: Colors.grey[800],
                   ),
                 ),
               ),
@@ -143,15 +164,16 @@ class _MenuPageState extends State<MenuPage> {
             padding: const EdgeInsets.only(left: 32, right: 32, top: 10),
             child: Expanded(
               child: SizedBox(
-                height: 270,
+                height: 250,
                 child: ListView.builder(
-                  itemCount: descriptions.length,
+                  itemCount: itemsList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Container(
-                        padding: const EdgeInsets.all(25),
+                        padding:
+                            const EdgeInsets.only(left: 25, top: 25, right: 25),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
@@ -163,7 +185,7 @@ class _MenuPageState extends State<MenuPage> {
                             Center(
                               child: SizedBox(
                                 width: 130,
-                                child: Image.asset('lib/images/rolls.png'),
+                                child: Image.asset(itemsList[index].image),
                               ),
                             ),
 
@@ -171,7 +193,7 @@ class _MenuPageState extends State<MenuPage> {
 
                             // Description.
                             Text(
-                              descriptions[index],
+                              itemsList[index].description,
                               style: GoogleFonts.dmSerifDisplay(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -182,9 +204,13 @@ class _MenuPageState extends State<MenuPage> {
 
                             Row(
                               children: [
-                                const Text(
-                                  '\$ 23.00',
-                                  style: TextStyle(fontSize: 12),
+                                Text(
+                                  "\$ ${itemsList[index].price}",
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[500],
+                                  ),
                                 ),
                                 const SizedBox(width: 70),
                                 Icon(
@@ -192,9 +218,12 @@ class _MenuPageState extends State<MenuPage> {
                                   size: 15,
                                   color: Colors.yellow[700],
                                 ),
-                                const Text(
-                                  '8.3',
-                                  style: TextStyle(fontSize: 12),
+                                Text(
+                                  itemsList[index].rating.toString(),
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.grey[500],
+                                  ),
                                 ),
                               ],
                             )
@@ -206,7 +235,63 @@ class _MenuPageState extends State<MenuPage> {
                 ),
               ),
             ),
-          )
+          ),
+
+          const SizedBox(height: 20),
+
+          Padding(
+            padding: const EdgeInsets.only(left: 32, right: 32),
+            child: SizedBox(
+              height: 120,
+              child: Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    // Image.
+                    SizedBox(
+                      child: Image.asset('lib/images/surimi_nigiri.png'),
+                    ),
+
+                    const SizedBox(width: 20),
+
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Surimi Nigiri',
+                          style: GoogleFonts.dmSerifDisplay(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                          ),
+                        ),
+
+                        const SizedBox(height: 20),
+
+                        Text(
+                          "\$ 23.00",
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(width: 120),
+
+                    // Fav Icon.
+                    const Icon(Icons.favorite_border, size: 30),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
