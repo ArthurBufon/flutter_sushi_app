@@ -19,14 +19,6 @@ class _MenuPageState extends State<MenuPage> {
     'sushi 5',
     'sushi 6',
   ];
-  final List<int> colorCodes = <int>[
-    600,
-    500,
-    100,
-    100,
-    100,
-    100,
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +143,7 @@ class _MenuPageState extends State<MenuPage> {
             padding: const EdgeInsets.only(left: 32, right: 32, top: 10),
             child: Expanded(
               child: SizedBox(
-                height: 300,
+                height: 270,
                 child: ListView.builder(
                   itemCount: descriptions.length,
                   scrollDirection: Axis.horizontal,
@@ -161,9 +153,53 @@ class _MenuPageState extends State<MenuPage> {
                       child: Container(
                         padding: const EdgeInsets.all(25),
                         decoration: BoxDecoration(
-                            color: Colors.amber[colorCodes[index]],
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Text('Entry ${descriptions[index]}'),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Image.
+                            Center(
+                              child: SizedBox(
+                                width: 130,
+                                child: Image.asset('lib/images/rolls.png'),
+                              ),
+                            ),
+
+                            const SizedBox(height: 15),
+
+                            // Description.
+                            Text(
+                              descriptions[index],
+                              style: GoogleFonts.dmSerifDisplay(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+
+                            const SizedBox(height: 15),
+
+                            Row(
+                              children: [
+                                const Text(
+                                  '\$ 23.00',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                const SizedBox(width: 70),
+                                Icon(
+                                  Icons.star,
+                                  size: 15,
+                                  color: Colors.yellow[700],
+                                ),
+                                const Text(
+                                  '8.3',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },
