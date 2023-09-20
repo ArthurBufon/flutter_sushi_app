@@ -17,30 +17,33 @@ class MyButton extends StatelessWidget {
       padding: const EdgeInsets.only(left: 25, top: 20, right: 25, bottom: 10),
       child: GestureDetector(
         onTap: onTap,
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(78, 245, 245, 245),
-            borderRadius: BorderRadius.circular(35),
-          ),
-          padding: const EdgeInsets.all(20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Text.
-              Text(
-                text,
-                style: GoogleFonts.oswald(
-                  color: Colors.grey[300],
-                  fontSize: 18,
+        child: SizedBox(
+          width: 150,
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(78, 245, 245, 245),
+              borderRadius: BorderRadius.circular(35),
+            ),
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Text.
+                Text(
+                  text,
+                  style: GoogleFonts.oswald(
+                    color: Colors.grey[300],
+                    fontSize: 20,
+                  ),
                 ),
-              ),
-      
-              // Icon.
-              Icon(
-                Icons.arrow_forward_outlined,
-                color: Colors.grey[300],
-              ),
-            ],
+        
+                // Icon.
+                Icon(
+                  Icons.arrow_forward_outlined,
+                  color: Colors.grey[300],
+                ),
+              ],
+            ),
           ),
         ),
       ),
