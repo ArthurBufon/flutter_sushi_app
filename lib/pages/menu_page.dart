@@ -11,6 +11,23 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+  final List<String> descriptions = <String>[
+    'sushi 1',
+    'sushi 2',
+    'sushi 3',
+    'sushi 4',
+    'sushi 5',
+    'sushi 6',
+  ];
+  final List<int> colorCodes = <int>[
+    600,
+    500,
+    100,
+    100,
+    100,
+    100,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,8 +104,10 @@ class _MenuPageState extends State<MenuPage> {
             ],
           ),
 
+          const SizedBox(height: 20),
+
           Padding(
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.only(left: 32, right: 32),
             child: TextField(
               decoration: InputDecoration(
                 enabledBorder: OutlineInputBorder(
@@ -106,6 +125,8 @@ class _MenuPageState extends State<MenuPage> {
               ),
             ),
           ),
+
+          const SizedBox(height: 15),
 
           // Title food menu
           Row(
@@ -126,11 +147,27 @@ class _MenuPageState extends State<MenuPage> {
           ),
 
           // Listview Food Menu
-          Expanded(
-            child: SizedBox(
-              height: 25,
-              child: ListView(
-                padding: const EdgeInsets.all(9.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 32, right: 32, top: 10),
+            child: Expanded(
+              child: SizedBox(
+                height: 300,
+                child: ListView.builder(
+                  itemCount: descriptions.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
+                        padding: const EdgeInsets.all(25),
+                        decoration: BoxDecoration(
+                            color: Colors.amber[colorCodes[index]],
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Text('Entry ${descriptions[index]}'),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           )
