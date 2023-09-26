@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sushi_app/pages/food_details.dart';
+import 'package:flutter_sushi_app/models/cart_model.dart';
 import 'package:flutter_sushi_app/pages/home_page.dart';
 import 'package:flutter_sushi_app/pages/menu_page.dart';
 import 'package:flutter_sushi_app/utils/scroll_behavior.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CartModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,6 +30,7 @@ class MyApp extends StatelessWidget {
       routes: {
         // Navigates to menu page.
         '/menupage': (context) => const MenuPage(),
+        '/items': (context) => const MenuPage(),
       },
     );
   }
