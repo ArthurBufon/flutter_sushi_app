@@ -33,7 +33,7 @@ class MyButton extends StatelessWidget {
                   text,
                   style: GoogleFonts.oswald(
                     color: Colors.grey[300],
-                    fontSize: 20,
+                    fontSize: 17,
                   ),
                 ),
         

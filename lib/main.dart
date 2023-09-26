@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sushi_app/pages/food_details.dart';
 import 'package:flutter_sushi_app/pages/home_page.dart';
 import 'package:flutter_sushi_app/pages/menu_page.dart';
 import 'package:flutter_sushi_app/utils/scroll_behavior.dart';

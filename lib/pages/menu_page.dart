@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sushi_app/components/button.dart';
 import 'package:flutter_sushi_app/models/item_model.dart';
+import 'package:flutter_sushi_app/pages/food_details.dart';
 import 'package:flutter_sushi_app/theme/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -169,65 +170,78 @@ class _MenuPageState extends State<MenuPage> {
                   itemCount: itemsList.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Container(
-                        padding:
-                            const EdgeInsets.only(left: 25, top: 25, right: 25),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Image.
-                            Center(
-                              child: SizedBox(
-                                width: 130,
-                                child: Image.asset(itemsList[index].image),
+                    return GestureDetector(
+                      onTap: () {
+                        // Navigates to menu.
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                FoodDetails(item: itemsList[index]),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Container(
+                          padding: const EdgeInsets.only(
+                              left: 25, top: 25, right: 25),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Image.
+                              Center(
+                                child: SizedBox(
+                                  width: 130,
+                                  child: Image.asset(itemsList[index].image),
+                                ),
                               ),
-                            ),
 
-                            const SizedBox(height: 15),
+                              const SizedBox(height: 15),
 
-                            // Description.
-                            Text(
-                              itemsList[index].description,
-                              style: GoogleFonts.dmSerifDisplay(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                              // Description.
+                              Text(
+                                itemsList[index].description,
+                                style: GoogleFonts.dmSerifDisplay(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
                               ),
-                            ),
 
-                            const SizedBox(height: 15),
+                              const SizedBox(height: 15),
 
-                            Row(
-                              children: [
-                                Text(
-                                  "\$ ${itemsList[index].price}",
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey[500],
+                              // Price and rating.
+                              Row(
+                                children: [
+                                  Text(
+                                    "\$ ${itemsList[index].price}",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey[500],
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(width: 70),
-                                Icon(
-                                  Icons.star,
-                                  size: 15,
-                                  color: Colors.yellow[700],
-                                ),
-                                Text(
-                                  itemsList[index].rating.toString(),
-                                  style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.grey[500],
+                                  const SizedBox(width: 70),
+                                  Icon(
+                                    Icons.star,
+                                    size: 15,
+                                    color: Colors.yellow[700],
                                   ),
-                                ),
-                              ],
-                            )
-                          ],
+                                  Text(
+                                    itemsList[index].rating.toString(),
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: Colors.grey[500],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -269,9 +283,7 @@ class _MenuPageState extends State<MenuPage> {
                             fontSize: 22,
                           ),
                         ),
-
                         const SizedBox(height: 20),
-
                         Text(
                           "\$ 23.00",
                           style: TextStyle(
