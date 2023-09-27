@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sushi_app/components/action_button.dart';
 import 'package:flutter_sushi_app/components/button.dart';
 import 'package:flutter_sushi_app/models/item_model.dart';
 import 'package:flutter_sushi_app/theme/colors.dart';
@@ -115,12 +116,14 @@ class _FoodDetailsState extends State<FoodDetails> {
               ],
             ),
           ),
+
           const SizedBox(height: 15),
 
-          // Add item to cart.
+          // Manage item.
           Expanded(
             child: Container(
-              height: 150,
+              padding: const EdgeInsets.all(32),
+              height: 100,
               decoration: const BoxDecoration(
                 color: primaryColor,
                 borderRadius: BorderRadius.only(
@@ -128,79 +131,55 @@ class _FoodDetailsState extends State<FoodDetails> {
                   topRight: Radius.circular(15),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 45, left: 25, right: 25, bottom: 15),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "\$ ${widget.item.price}",
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "\$ ${widget.item.price}",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(width: 270),
+          
+                      // Remove item.
+                      ActionButton(
+                        onTap: () => decrementQuantity(),
+                        icon: Icons.remove,
+                      ),
+          
+                      // ItemQuantity
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 12,
+                          right: 12,
+                        ),
+                        child: Text(
+                          itemQuantity.toString(),
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        const SizedBox(width: 290),
-
-                        // Remove item.
-                        GestureDetector(
-                          onTap: () => decrementQuantity(),
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(71, 250, 250, 250),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Icon(
-                              Icons.remove,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-
-                        // ItemQuantity
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 12,
-                            right: 12,
-                          ),
-                          child: Text(
-                            itemQuantity.toString(),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-
-                        // Add item.
-                        GestureDetector(
-                          onTap: () => incrementQuantity(),
-                          child: Container(
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(71, 250, 250, 250),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: const Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 15),
-
-                    // Add to cart.
-                    MyButton(text: 'Add to Cart', onTap: () {})
-                  ],
-                ),
+                      ),
+          
+                      // Add item.
+                      ActionButton(
+                        onTap: () => incrementQuantity(),
+                        icon: Icons.add,
+                      ),
+                    ],
+                  ),
+          
+                  const SizedBox(height: 15),
+          
+                  // Add to cart.
+                  MyButton(text: 'Add to Cart', onTap: () {})
+                ],
               ),
             ),
           ),

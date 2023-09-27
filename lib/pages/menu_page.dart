@@ -161,9 +161,9 @@ class _MenuPageState extends State<MenuPage> {
           ),
 
           // Listview Food Menu
-          Padding(
-            padding: const EdgeInsets.only(left: 32, right: 32, top: 10),
-            child: Expanded(
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 32, right: 32, top: 10),
               child: SizedBox(
                 height: 250,
                 child: ListView.builder(
@@ -200,9 +200,9 @@ class _MenuPageState extends State<MenuPage> {
                                   child: Image.asset(itemsList[index].image),
                                 ),
                               ),
-
+            
                               const SizedBox(height: 15),
-
+            
                               // Description.
                               Text(
                                 itemsList[index].description,
@@ -211,9 +211,9 @@ class _MenuPageState extends State<MenuPage> {
                                   fontSize: 20,
                                 ),
                               ),
-
+            
                               const SizedBox(height: 15),
-
+            
                               // Price and rating.
                               Row(
                                 children: [
