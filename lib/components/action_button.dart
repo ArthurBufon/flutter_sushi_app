@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ActionButton extends StatelessWidget {
-  final void Function()? onTap;
   final IconData icon;
+  final VoidCallback _onTap;
 
-  const ActionButton({
-    required this.onTap,
+  const ActionButton(
+    this._onTap, {
     required this.icon,
     super.key,
   });
@@ -13,7 +13,7 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onTap,
+      onTap: _onTap,
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(

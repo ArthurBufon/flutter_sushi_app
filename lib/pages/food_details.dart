@@ -26,6 +26,7 @@ class _FoodDetailsState extends State<FoodDetails> {
     setState(() {
       itemQuantity += 1;
     });
+    print(itemQuantity);
   }
 
   // Decrements item quantity.
@@ -34,6 +35,7 @@ class _FoodDetailsState extends State<FoodDetails> {
       // If quantity >= 1, increments counter.
       if (itemQuantity >= 1) {
         itemQuantity -= 1;
+        print(itemQuantity);
       }
       // If quantity = 0, returns null.
       else {
@@ -144,13 +146,13 @@ class _FoodDetailsState extends State<FoodDetails> {
                         ),
                       ),
                       const SizedBox(width: 270),
-          
+
                       // Remove item.
                       ActionButton(
-                        onTap: () => decrementQuantity(),
+                        () => decrementQuantity(),
                         icon: Icons.remove,
                       ),
-          
+
                       // ItemQuantity
                       Padding(
                         padding: const EdgeInsets.only(
@@ -166,17 +168,17 @@ class _FoodDetailsState extends State<FoodDetails> {
                           ),
                         ),
                       ),
-          
+
                       // Add item.
                       ActionButton(
-                        onTap: () => incrementQuantity(),
+                        () => incrementQuantity(),
                         icon: Icons.add,
                       ),
                     ],
                   ),
-          
+
                   const SizedBox(height: 15),
-          
+
                   // Add to cart.
                   MyButton(text: 'Add to Cart', onTap: () {})
                 ],
