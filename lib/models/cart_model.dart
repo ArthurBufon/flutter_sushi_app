@@ -4,19 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sushi_app/models/item_model.dart';
 
 class CartModel extends ChangeNotifier {
-  // List of items inside the Cart
-  final List<Item> itemsList = [];
+  // Items of the Cart
+  final List<Item> _items = [];
 
-  // Gets all items from the Cart.
-  UnmodifiableListView<Item> get items => UnmodifiableListView(itemsList);
+  // Gets unmodifiable list of all items in the Cart.
+  UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
 
   // Adds new item to the Cart.
   void add(Item item) {
-    itemsList.add(item);
+    _items.add(item);
+
+    // Notifying that CartModel changed.
+    notifyListeners();
   }
 
   // Removes item from the Cart.
   void remove(Item item) {
-    itemsList.remove(item);
+    _items.remove(item);
+
+    // Notifying that CartModel changed.
+    notifyListeners();
   }
 }

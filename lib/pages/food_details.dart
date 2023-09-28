@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sushi_app/components/action_button.dart';
 import 'package:flutter_sushi_app/components/button.dart';
+import 'package:flutter_sushi_app/models/cart_model.dart';
 import 'package:flutter_sushi_app/models/item_model.dart';
 import 'package:flutter_sushi_app/theme/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class FoodDetails extends StatefulWidget {
   final Item item;
@@ -18,6 +20,7 @@ class FoodDetails extends StatefulWidget {
 }
 
 class _FoodDetailsState extends State<FoodDetails> {
+
   // Initializing item quantity.
   int itemQuantity = 0;
 
@@ -26,7 +29,6 @@ class _FoodDetailsState extends State<FoodDetails> {
     setState(() {
       itemQuantity += 1;
     });
-    print(itemQuantity);
   }
 
   // Decrements item quantity.
@@ -35,13 +37,23 @@ class _FoodDetailsState extends State<FoodDetails> {
       // If quantity >= 1, increments counter.
       if (itemQuantity >= 1) {
         itemQuantity -= 1;
-        print(itemQuantity);
       }
       // If quantity = 0, returns null.
       else {
         return;
       }
     });
+  }
+
+  // Adds item to cart.
+  addItemToCart(BuildContext context, Item item) {
+    var cartModel = context.read<CartModel>();
+    cartModel.add(item);
+
+    // cartController.add(item);
+    // Navigates to cart page.
+    Navigator.pushNamed(context, '/cart');
+    print('Added successfully!');
   }
 
   @override
@@ -180,7 +192,13 @@ class _FoodDetailsState extends State<FoodDetails> {
                   const SizedBox(height: 15),
 
                   // Add to cart.
-                  MyButton(text: 'Add to Cart', onTap: () {})
+                  MyButton(
+                    text: 'Add to Cart',
+                    // Adds item to cart.
+                    onTap: () {
+                      addItemToCart(context, widget.item);
+                    },
+                  )
                 ],
               ),
             ),
