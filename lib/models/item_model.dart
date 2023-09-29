@@ -4,9 +4,11 @@ class Item {
   String description;
   double price;
   double rating;
+  int quantity;
 
   // Constructor of Item.
   Item({
+    this.quantity = 1,
     required this.image,
     required this.description,
     required this.price,

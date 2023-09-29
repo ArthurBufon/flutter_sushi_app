@@ -27,14 +27,15 @@ class _CartPageState extends State<CartPage> {
               return SizedBox(
                 height: 100,
                 child: ListView.builder(
-                    itemCount: cart.items.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final item = cart.items[index];
-              
-                      return ListTile(
-                        title: Text(item.description),
-                      );
-                    }),
+                  itemCount: cart.items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = cart.items[index];
+
+                    return ListTile(
+                      title: Text('${item.description} (${item.quantity})'),
+                    );
+                  },
+                ),
               );
               // return Text(cart.items.length.toString());
             },

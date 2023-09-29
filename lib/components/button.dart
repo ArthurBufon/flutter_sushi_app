@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class MyButton extends StatelessWidget {
   final String text;
-  final void Function()? onTap;
+  final Function()? onTap;
 
   const MyButton({
     required this.text,

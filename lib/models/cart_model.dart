@@ -12,7 +12,14 @@ class CartModel extends ChangeNotifier {
 
   // Adds new item to the Cart.
   void add(Item item) {
-    _items.add(item);
+    // If item already exists.
+    if (_items.contains(item)) {
+      item.quantity++;
+    }
+    // Item does not exist.
+    else {
+      _items.add(item);
+    }
 
     // Notifying that CartModel changed.
     notifyListeners();

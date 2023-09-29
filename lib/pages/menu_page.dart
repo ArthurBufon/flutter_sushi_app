@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_sushi_app/components/button.dart';
 import 'package:flutter_sushi_app/models/item_model.dart';
@@ -16,10 +18,12 @@ class _MenuPageState extends State<MenuPage> {
   // List of items.
   final List<Item> itemsList = <Item>[
     Item(
-        image: 'lib/images/sake_nigiri.png',
-        description: 'Sake Nigiri',
-        price: 16.50,
-        rating: 7.5),
+      quantity: 0,
+      image: 'lib/images/sake_nigiri.png',
+      description: 'Sake Nigiri',
+      price: 16.50,
+      rating: 7.5,
+    ),
     Item(
         image: 'lib/images/sashimi.png',
         description: 'Sashimi',
@@ -200,9 +204,9 @@ class _MenuPageState extends State<MenuPage> {
                                   child: Image.asset(itemsList[index].image),
                                 ),
                               ),
-            
+
                               const SizedBox(height: 15),
-            
+
                               // Description.
                               Text(
                                 itemsList[index].description,
@@ -211,9 +215,9 @@ class _MenuPageState extends State<MenuPage> {
                                   fontSize: 20,
                                 ),
                               ),
-            
+
                               const SizedBox(height: 15),
-            
+
                               // Price and rating.
                               Row(
                                 children: [
