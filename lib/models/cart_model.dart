@@ -18,6 +18,10 @@ class CartModel extends ChangeNotifier {
     }
     // Item does not exist.
     else {
+      // Sets quantity.
+      item.quantity = quantity;
+
+      // Adds Item.
       _items.add(item);
     }
 
