@@ -20,6 +20,9 @@ class FoodDetails extends StatefulWidget {
 }
 
 class _FoodDetailsState extends State<FoodDetails> {
+  // Quantity.
+  int itemQuantity = 1;
+
   // Error Snackbar.
   final errorSnackBar = const SnackBar(
     content: Text('You cannot add 0 items to cart!'),
@@ -28,7 +31,7 @@ class _FoodDetailsState extends State<FoodDetails> {
   // Increments item quantity.
   void incrementQuantity() {
     setState(() {
-      widget.item.quantity += 1;
+      itemQuantity += 1;
     });
   }
 
@@ -36,8 +39,8 @@ class _FoodDetailsState extends State<FoodDetails> {
   void decrementQuantity() {
     setState(() {
       // If quantity >= 1, decrements quantity.
-      if (widget.item.quantity >= 1) {
-        widget.item.quantity -= 1;
+      if (itemQuantity >= 1) {
+        itemQuantity -= 1;
       }
       // If quantity = 0, returns null.
       else {
@@ -47,12 +50,12 @@ class _FoodDetailsState extends State<FoodDetails> {
   }
 
   // Adds item to cart.
-  addItemToCart(BuildContext context, Item item) {
+  addItemToCart(BuildContext context, Item item, int itemQuantity) {
     // Gets the cart.
     var cartModel = context.read<CartModel>();
 
     // Adds the item.
-    cartModel.add(item);
+    cartModel.add(item, itemQuantity);
 
     // Navigates to cart page.
     Navigator.pushNamed(context, '/cart');
@@ -160,7 +163,7 @@ class _FoodDetailsState extends State<FoodDetails> {
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(width: 270),
+                      const SizedBox(width: 250),
 
                       // Remove item.
                       ActionButton(
@@ -169,17 +172,16 @@ class _FoodDetailsState extends State<FoodDetails> {
                       ),
 
                       // ItemQuantity
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 12,
-                          right: 12,
-                        ),
-                        child: Text(
-                          widget.item.quantity.toString(),
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                      SizedBox(
+                        width: 35,
+                        child: Center(
+                          child: Text(
+                            itemQuantity.toString(),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -200,14 +202,14 @@ class _FoodDetailsState extends State<FoodDetails> {
                     // Adds item to cart.
                     onTap: () {
                       // Quantity is empty.
-                      if (widget.item.quantity == 0) {
+                      if (itemQuantity == 0) {
                         // Displays error message.
                         return ScaffoldMessenger.of(context)
                             .showSnackBar(errorSnackBar);
                       }
                       // Trying to add at least 1.
                       else {
-                        addItemToCart(context, widget.item);
+                        addItemToCart(context, widget.item, itemQuantity);
                       }
                     },
                   )

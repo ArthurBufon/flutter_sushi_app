@@ -11,10 +11,10 @@ class CartModel extends ChangeNotifier {
   UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
 
   // Adds new item to the Cart.
-  void add(Item item) {
+  void add(Item item, int quantity) {
     // If item already exists.
     if (_items.contains(item)) {
-      item.quantity++;
+      item.quantity += quantity;
     }
     // Item does not exist.
     else {
