@@ -15,10 +15,9 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  // List of items.
+  // List of dummy items.
   final List<Item> itemsList = <Item>[
     Item(
-      quantity: 0,
       image: 'lib/images/sake_nigiri.png',
       description: 'Sake Nigiri',
       price: 16.50,
@@ -59,6 +58,19 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.shopping_cart,
+              color: Colors.grey[800],
+              size: 23,
+            ),
+            onPressed: () {
+              // Navigates to cart.
+              Navigator.pushNamed(context, '/cart');
+            },
+          )
+        ],
       ),
       body: Column(
         children: [

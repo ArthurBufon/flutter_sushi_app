@@ -164,13 +164,14 @@ class _FoodDetailsState extends State<FoodDetails> {
                         ),
                       ),
                       const SizedBox(width: 250),
-
+          
                       // Remove item.
                       ActionButton(
                         () => decrementQuantity(),
                         icon: Icons.remove,
+                        color: const Color.fromARGB(71, 250, 250, 250),
                       ),
-
+          
                       // ItemQuantity
                       SizedBox(
                         width: 35,
@@ -185,17 +186,18 @@ class _FoodDetailsState extends State<FoodDetails> {
                           ),
                         ),
                       ),
-
+          
                       // Add item.
                       ActionButton(
                         () => incrementQuantity(),
                         icon: Icons.add,
+                        color: const Color.fromARGB(71, 250, 250, 250),
                       ),
                     ],
                   ),
-
+          
                   const SizedBox(height: 15),
-
+          
                   // Add to cart.
                   MyButton(
                     text: 'Add to Cart',
