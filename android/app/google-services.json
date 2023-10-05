@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "428064814429",
+    "project_id": "flutter-sushi-app-f5b7d",
+    "storage_bucket": "flutter-sushi-app-f5b7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428064814429:android:e5bbd389bf8ec4ac7424b4",
+        "android_client_info": {
+          "package_name": "br.com.arthurbufon.flutter_sushi_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhk6Shml7FP1fcUSzGjCQ6tYgCNYGP_9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
