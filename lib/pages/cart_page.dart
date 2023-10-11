@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sushi_app/components/cart_action_button.dart';
+import 'package:flutter_sushi_app/controllers/order_controller.dart';
 import 'package:flutter_sushi_app/models/cart_model.dart';
 import 'package:flutter_sushi_app/models/item_model.dart';
 import 'package:flutter_sushi_app/theme/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -14,6 +16,9 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  // Injecting controller.
+  final OrderController orderController = OrderController();
+
   // Updates item quantity
   updateItemQuantity(BuildContext context, Item item, int itemQuantity) {
     // Gets the cart.
@@ -22,6 +27,15 @@ class _CartPageState extends State<CartPage> {
     // Adds the item.
     cartModel.updateItemQuantity(item, itemQuantity);
     print('Added successfully!');
+  }
+
+  // Stores order in database.
+  storeOrder() {
+    // Gets the cart.
+    var cartModel = context.read<CartModel>();
+
+return print(cartModel.toJson());
+    // orderController.store(cartModel);
   }
 
   // Returns list with all items inside cart.
@@ -209,9 +223,12 @@ class _CartPageState extends State<CartPage> {
                                   padding: const EdgeInsets.only(
                                       left: 25, top: 20, right: 25, bottom: 10),
                                   child: GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      storeOrder();
+                                    },
                                     child: SizedBox(
-                                      width: MediaQuery.of(context).size.width * 0.7,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.7,
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: const Color.fromARGB(

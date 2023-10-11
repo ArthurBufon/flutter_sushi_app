@@ -1,26 +1,29 @@
 import 'dart:collection';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_sushi_app/models/item_model.dart';
 
 class CartModel extends ChangeNotifier {
   // Items of the Cart
-  final List<Item> _items = [
-    // Dummy item delete later.
-    Item(
-      quantity: 1,
-      image: 'lib/images/sake_nigiri.png',
-      description: 'Sake Nigiri',
-      price: 16.50,
-      rating: 7.5,
-    )
-  ];
+  final List<Item> _items = [];
 
   // Gets unmodifiable list of all items in the Cart.
   UnmodifiableListView<Item> get items => UnmodifiableListView(_items);
 
   // The current total price of all items.
-  double get totalPrice => items.fold(0, (total, current) => total + current.price * current.quantity);
+  double get totalPrice => items.fold(
+      0, (total, current) => total + current.price * current.quantity);
+
+  // Turns order into json.
+  Map<String, dynamic> toJson() {
+    // ignore: prefer_collection_literals, unnecessary_new
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['price'] = totalPrice;
+    data['items'] = _items;
+    data['items'] = jsonEncode(_items.map((e) => e.toJson()).toList());
+    return data;
+  }
 
   // Adds new item to the Cart.
   void add(Item item, int quantity) {

@@ -14,4 +14,14 @@ class Item {
     required this.price,
     required this.rating,
   });
+
+  // Turns item into json.
+  Map<String, dynamic> toJson() {
+    // ignore: prefer_collection_literals, unnecessary_new
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['description'] = description;
+    data['price'] = price;
+    data['rating'] = rating;
+    return data;
+  }
 }
