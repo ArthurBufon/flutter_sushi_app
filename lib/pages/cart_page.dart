@@ -3,6 +3,7 @@ import 'package:flutter_sushi_app/components/cart_action_button.dart';
 import 'package:flutter_sushi_app/controllers/order_controller.dart';
 import 'package:flutter_sushi_app/models/cart_model.dart';
 import 'package:flutter_sushi_app/models/item_model.dart';
+import 'package:flutter_sushi_app/pages/order_details.dart';
 import 'package:flutter_sushi_app/theme/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -30,15 +31,20 @@ class _CartPageState extends State<CartPage> {
   }
 
   // Stores order in database.
-  storeOrder() {
-
+  storeOrder() async {
     // Gets json of order.
     var orderData = context.read<CartModel>().toJson();
 
-    // Gets json of order items.
-    var orderItems = context.read<CartModel>().itemsToJson();
-
-    orderController.store(orderData, orderItems);
+    // Stores order in firestore.
+    await orderController
+        .store(orderData)
+        .then((orderId) => // Navigates to menu.
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => OrderDetails(orderId),
+              ),
+            ));
   }
 
   // Returns list with all items inside cart.
@@ -49,6 +55,16 @@ class _CartPageState extends State<CartPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        title: Center(
+          child: Text(
+            'NAKAZAWA',
+            style: GoogleFonts.oswald(
+              color: Colors.grey[800],
+              fontWeight: FontWeight.bold,
+              fontSize: 23,
+            ),
+          ),
+        ),
       ),
       body: Column(
         children: [

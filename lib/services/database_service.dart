@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -7,30 +5,31 @@ class DatabaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   // Store order.
-  storeOrder(Map<String, dynamic> orderData, orderItems) async {
-    print(orderData['items'].runtimeType);
-    await _db.collection("orders").add(orderData).then((documentSnapshot) {
-      print(documentSnapshot.id);
-      // storeOrderItems(documentSnapshot.id, orderItems);
+  Future<String> storeOrder(Map<String, dynamic> orderData) async {
+    print(orderData['items']);
+    return await _db
+        .collection("orders")
+        .add(orderData)
+        .then((documentSnapshot) {
+      return documentSnapshot.id;
     });
   }
 
-  // Store Order Items
-  storeOrderItems(String orderDoc, Map<String, dynamic> orderItems) {
+  // Gets order by id.
+  Future<Map<String, dynamic>> getById(String orderId) async {
+    // Reference to order document.
+    final docRef = _db.collection("orders").doc(orderId);
 
-    print(orderItems.runtimeType);
-
-      print(orderItems);
-
-    for (var item in orderItems.values) {
-
-      print(item);
-
-      // _db
-      //     .collection("orders")
-      //     .doc(orderDoc)
-      //     .collection("items")
-      //     .add(itemJson);
-    }
+    // Returns order data.
+    return await docRef.get().then(
+      (DocumentSnapshot doc) {
+        // Converts snapshot to map.
+        final orderData = doc.data() as Map<String, dynamic>;
+        
+        // Returns orderData.
+        return orderData;
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
   }
 }

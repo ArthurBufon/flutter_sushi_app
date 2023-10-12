@@ -22,6 +22,7 @@ class Item {
     data['description'] = description;
     data['price'] = price;
     data['rating'] = rating;
+    data['quantity'] = quantity;
     return data;
   }
 }

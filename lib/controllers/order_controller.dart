@@ -6,7 +6,12 @@ class OrderController {
   final repository = OrderRepository();
 
   // Stores order in database.
-  void store(Map<String, dynamic> orderData, orderItems) {
-    repository.insert(orderData, orderItems);
+  Future<String> store(Map<String, dynamic> orderData) async{
+    return await repository.insert(orderData);
+  }
+
+  // Stores order in database.
+  Future<Map<String, dynamic>> getById(String orderId) async{
+    return await repository.getById(orderId);
   }
 }

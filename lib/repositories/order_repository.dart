@@ -8,7 +8,13 @@ class OrderRepository implements IOrderRepository {
 
   // Store order.
   @override
-  Future<void> insert(Map<String, dynamic> orderData, orderItems) async {
-    service.storeOrder(orderData, orderItems);
+  Future<String> insert(Map<String, dynamic> orderData) async {
+    return await service.storeOrder(orderData);
+  }
+
+  // Gets order by id.
+  @override
+  Future<Map<String, dynamic>> getById(String orderId) async {
+    return await service.getById(orderId);
   }
 }
