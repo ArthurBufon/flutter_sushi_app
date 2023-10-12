@@ -6,7 +6,6 @@ class DatabaseService {
 
   // Store order.
   Future<String> storeOrder(Map<String, dynamic> orderData) async {
-    print(orderData['items']);
     return await _db
         .collection("orders")
         .add(orderData)

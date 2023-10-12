@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sushi_app/components/cart_action_button.dart';
 import 'package:flutter_sushi_app/controllers/order_controller.dart';
-import 'package:flutter_sushi_app/models/cart_model.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class OrderDetails extends StatefulWidget {
   final String orderId;
@@ -42,6 +39,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Center(
