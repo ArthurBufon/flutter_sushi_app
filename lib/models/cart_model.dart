@@ -20,7 +20,14 @@ class CartModel extends ChangeNotifier {
     // ignore: prefer_collection_literals, unnecessary_new
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['price'] = totalPrice;
-    data['items'] = _items;
+    data['items'] = _items.map((e) => e.toJson()).toList();
+    return data;
+  }
+
+  // Turns order items into json.
+  Map<String, dynamic> itemsToJson() {
+    // ignore: prefer_collection_literals, unnecessary_new
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['items'] = jsonEncode(_items.map((e) => e.toJson()).toList());
     return data;
   }

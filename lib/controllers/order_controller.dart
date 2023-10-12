@@ -1,4 +1,3 @@
-import 'package:flutter_sushi_app/models/cart_model.dart';
 import 'package:flutter_sushi_app/repositories/order_repository.dart';
 
 class OrderController {
@@ -7,8 +6,7 @@ class OrderController {
   final repository = OrderRepository();
 
   // Stores order in database.
-  void store(CartModel cartData) {
-    print(cartData);
-    repository.insert(cartData);
+  void store(Map<String, dynamic> orderData, orderItems) {
+    repository.insert(orderData, orderItems);
   }
 }

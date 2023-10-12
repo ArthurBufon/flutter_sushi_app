@@ -31,11 +31,14 @@ class _CartPageState extends State<CartPage> {
 
   // Stores order in database.
   storeOrder() {
-    // Gets the cart.
-    var cartModel = context.read<CartModel>();
 
-return print(cartModel.toJson());
-    // orderController.store(cartModel);
+    // Gets json of order.
+    var orderData = context.read<CartModel>().toJson();
+
+    // Gets json of order items.
+    var orderItems = context.read<CartModel>().itemsToJson();
+
+    orderController.store(orderData, orderItems);
   }
 
   // Returns list with all items inside cart.
